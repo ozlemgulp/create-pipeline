@@ -94,3 +94,9 @@ gradle-app.setting
 
 .kotlintest/
 .vscode
+
+#system files
+.classpath
+.project
+.settings/
+bin/
