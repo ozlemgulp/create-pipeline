@@ -9,7 +9,6 @@ val jaxbVersion = "2.3.0"
 val kotestVersion = "4.0.5"
 
 plugins {
-    java
     kotlin("jvm") version "1.3.50"
     jacoco
     id("com.github.ben-manes.versions") version "0.26.0"
