@@ -13,7 +13,6 @@ plugins {
     jacoco
     id("com.github.ben-manes.versions") version "0.26.0"
     id("com.adarshr.test-logger") version "2.0.0"
-	id("org.owasp.dependencycheck") version "6.1.5"
     application
 }
 
@@ -67,8 +66,19 @@ compileKotlin.kotlinOptions.jvmTarget = "1.8"
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.owasp:dependency-check-gradle:6.1.5'
+    }
+}
+ 
+apply plugin: 'org.owasp.dependencycheck'
+
 dependencyCheck {
-	cve { 
+	cve {
 		urlModified = 'https://freedumbytes.gitlab.io/setup/nist-nvd-mirror/nvdcve-1.1-modified.json.gz'
 		urlBase = 'https://freedumbytes.gitlab.io/setup/nist-nvd-mirror/nvdcve-1.1-%d.json.gz' 
 	}
