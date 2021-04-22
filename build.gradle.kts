@@ -13,7 +13,6 @@ plugins {
     jacoco
     id("com.github.ben-manes.versions") version "0.26.0"
     id("com.adarshr.test-logger") version "2.0.0"
-	id("org.owasp.dependencycheck") version "6.1.0"
     application
 }
 
@@ -66,3 +65,15 @@ compileKotlin.kotlinOptions.jvmTarget = "1.8"
 
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
+buildscript {
+  repositories {
+    maven {
+      url = uri("https://plugins.gradle.org/m2/")
+    }
+  }
+  dependencies {
+    classpath("org.owasp:dependency-check-gradle:6.1.5")
+  }
+}
+
+apply(plugin = "org.owasp.dependencycheck")
