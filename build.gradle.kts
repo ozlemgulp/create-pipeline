@@ -9,6 +9,7 @@ val jaxbVersion = "2.3.0"
 val kotestVersion = "4.0.5"
 
 plugins {
+    java
     kotlin("jvm") version "1.3.50"
     jacoco
     id("com.github.ben-manes.versions") version "0.26.0"
@@ -45,7 +46,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-joda:$jacksonVersion")
-
+    
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion") // for kotest framework
     testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion") // for kotest core jvm assertions
     testImplementation("io.mockk:mockk:1.9.3")
@@ -68,5 +69,5 @@ val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
 dependencyCheck {
-    autoUpdate = false
+    failOnError=false
 }
