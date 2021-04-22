@@ -32,4 +32,10 @@ jobs:
       # Runs a single command using the runners shell
       - name: OWASP checker
         run: ./gradlew --stacktrace dependencyCheckAnalyze
+    
+      - name: Backup OWASP Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: dependency-check-report.html
+          path: ./build/reports/dependency-check-report.html
 
