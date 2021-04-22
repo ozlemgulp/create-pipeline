@@ -67,4 +67,9 @@ compileKotlin.kotlinOptions.jvmTarget = "1.8"
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
-dependencyCheck{cve { urlModified = 'https://freedumbytes.gitlab.io/setup/nist-nvd-mirror/nvdcve-1.1-modified.json.gz' urlBase = 'https://freedumbytes.gitlab.io/setup/nist-nvd-mirror/nvdcve-1.1-%d.json.gz' }}
+dependencyCheck {
+	cve { 
+		urlModified = 'https://freedumbytes.gitlab.io/setup/nist-nvd-mirror/nvdcve-1.1-modified.json.gz'
+		urlBase = 'https://freedumbytes.gitlab.io/setup/nist-nvd-mirror/nvdcve-1.1-%d.json.gz' 
+	}
+}
