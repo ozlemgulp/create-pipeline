@@ -47,11 +47,21 @@ jobs:
       - name: Run Snyk to check for vulnerabilities
         run: ./gradlew --stacktrace snyk-test > snyk.json
     
-      - name: Backup OWASP Report
+      - name: Backup Synt Report
         uses: actions/upload-artifact@v2
         with:
           name: snyk.json
           path: ./build/reports/snyk.json
+          
+      # Runs a single command using the runners shell
+      - name: Run jacocoTest for Code Coverage
+        run: ./gradlew test jacocoTestReport
+    
+      - name: Backup jacocoTest Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: index.html
+          path: ./build/reports/jacoco/test/html/index.html
           
               
   # This workflow contains a single job called "scan"
@@ -127,3 +137,4 @@ jobs:
     - run: yarn # Install dependencies
     - run: yarn test --coverage # Run test
     - run: bash <(curl -s https://codecov.io/bash) # Upload to Codecov
+    
