@@ -63,6 +63,10 @@ jobs:
           name: index.html
           path: ./build/reports/jacoco/test/html/index.html
           
+      # Runs a single command using the runners shell
+      - name: Check that code coverage met the defined limit
+        run: ./gradlew test jacocoTestCoverageVerification
+          
               
   # This workflow contains a single job called "scan"
   scan:
@@ -130,11 +134,4 @@ jobs:
         # Path to SARIF file relative to the root of the repository
         sarif_file: ${{ github.workspace }}/detekt.sarif.json
         checkout_path: ${{ github.workspace }}
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2 # Check out your repository
-    - run: yarn # Install dependencies
-    - run: yarn test --coverage # Run test
-    - run: bash <(curl -s https://codecov.io/bash) # Upload to Codecov
     
