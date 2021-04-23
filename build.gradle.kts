@@ -14,6 +14,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.26.0"
     id("com.adarshr.test-logger") version "2.0.0"
 	id("org.owasp.dependencycheck") version "6.1.5"
+    id("io.snyk.gradle.plugin.snykplugin") version "0.4"
     application
 }
 
@@ -69,4 +70,11 @@ compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
 dependencyCheck {
     failOnError=false
+}
+snyk {
+    arguments = '--all-sub-projects'
+    severity = 'low'
+    api = '0123fd2d-0b10-4f29-bbae-22aa9a455838'
+    autoDownload = true
+    autoUpdate = true
 }
