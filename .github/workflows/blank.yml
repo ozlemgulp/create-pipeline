@@ -46,7 +46,7 @@ jobs:
   
       # Runs a single command using the runners shell
       - name: Run Snyk to check for vulnerabilities
-        run: ./gradle --stacktrace snyk-test
+        run: ./gradlew --stacktrace snyk-test
     
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v1
