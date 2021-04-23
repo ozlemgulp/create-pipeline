@@ -66,6 +66,14 @@ jobs:
       # Runs a single command using the runners shell
       - name: Check that code coverage met the defined limit
         run: ./gradlew test jacocoTestCoverageVerification
+        
+      - name: 'Publish Test Report'
+        if: always()
+        uses: actions/upload-artifact@v2-preview
+        with:
+          name: 'test-report'
+          path: build/reports/tests/test/*
+
           
               
   # This workflow contains a single job called "scan"
