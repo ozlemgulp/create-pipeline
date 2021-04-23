@@ -71,10 +71,7 @@ compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 dependencyCheck {
     failOnError=false
 }
-snyk {
-    arguments = '--all-sub-projects'
-    severity = 'low'
-    api = '0123fd2d-0b10-4f29-bbae-22aa9a455838'
-    autoDownload = true
-    autoUpdate = true
+
+configure<io.snyk.gradle.plugin.SnykExtension> {
+   setApi("edf99da8-af0f-4289-af57-efa4e0133df1")
 }
