@@ -28,6 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run jacocoTest for Code Coverage
         run: ./gradlew test jacocoTestReport
+        
       - name: 'Publish jococoResult.xml'
         if: always()
         uses: actions/upload-artifact@v2
@@ -35,30 +36,21 @@ jobs:
           name: jacocoTestReport.xml
           path: ./build/reports/jacoco/test/jacocoTestReport.xml
         
-      # Runs a single command using the runners shell
-      #- name: Integrate jacocoTestCoverage to Sonarqube
-      # run: ./gradlew build jacocoTestReport sonarqube
-    
-      # - name: Backup jacocoTest Report
-        # uses: actions/upload-artifact@v2
-        # with:
-          # name: index.html
-          # path: ./build/reports/jacoco/test/html/index.html
           
       # Runs a single command using the runners shell
       - name: Check that code coverage met the defined limit
         run: ./gradlew test jacocoTestCoverageVerification
-        
-      # - name: 'Publish Test Report'
-        # if: always()
-        # uses: actions/upload-artifact@v2-preview
-        # with:
-          # name: 'test-report'
-          # path: /build/reports/jacoco/test/*
+
           
       # Runs a single command using the runners shell
       - name: Built and test project
         run: ./gradlew clean build
+      - name: 'Publish Test Report'
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'test-report'
+          path: /build/reports/test/test/*
         
   sonarcloud:
     if: always()
@@ -73,7 +65,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: jacocoTestReport.xml
-        path: ./build/reports/jacoco/test/jacocoTestReport.xml
+        path: /build/reports/jacoco/test/jacocoTestReport.xml
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
