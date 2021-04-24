@@ -83,3 +83,6 @@ tasks.jacocoTestCoverageVerification {
     }
 }
 
+jacoco {
+	toolVersion = "0.8.6"
+}
