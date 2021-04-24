@@ -71,13 +71,14 @@ compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
 dependencyCheck {
     failOnError=false
+    format='ALL'
 }
 
 tasks.jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = "0.9".toBigDecimal()
+                minimum = "0.8".toBigDecimal()
             }
         }
     }
