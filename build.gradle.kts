@@ -71,7 +71,6 @@ compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
 dependencyCheck {
     failOnError = false
-    format=ALL
 }
 
 tasks.jacocoTestCoverageVerification {
