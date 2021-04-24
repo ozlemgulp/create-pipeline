@@ -15,6 +15,8 @@ plugins {
     id("com.adarshr.test-logger") version "2.0.0"
 	id("org.owasp.dependencycheck") version "6.1.5"
     id("io.snyk.gradle.plugin.snykplugin") version "0.4"
+    id("org.sonarqube") version "3.1"
+
     application
 }
 
@@ -74,4 +76,13 @@ dependencyCheck {
 
 configure<io.snyk.gradle.plugin.SnykExtension> {
    setApi("edf99da8-af0f-4289-af57-efa4e0133df1")
+}
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.9".toBigDecimal()
+            }
+        }
+    }
 }
