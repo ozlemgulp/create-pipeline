@@ -32,15 +32,15 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2-preview
         with:
-          name: 'jacocoTestReport'
-          path: ./build/reports/jacoco/test/*
+          name: 'jacocoTestReport.xml'
+          path: ./build/reports/jacoco/test/jacocoTestReport.xml
         
       # Runs a single command using the runners shell
       #- name: Integrate jacocoTestCoverage to Sonarqube
       # run: ./gradlew build jacocoTestReport sonarqube
     
-      - name: Backup jacocoTest Report
-        uses: actions/upload-artifact@v2
+      # - name: Backup jacocoTest Report
+        # uses: actions/upload-artifact@v2
         # with:
           # name: index.html
           # path: ./build/reports/jacoco/test/html/index.html
@@ -49,12 +49,12 @@ jobs:
       - name: Check that code coverage met the defined limit
         run: ./gradlew test jacocoTestCoverageVerification
         
-      - name: 'Publish Test Report'
-        if: always()
-        uses: actions/upload-artifact@v2-preview
-        with:
-          name: 'test-report'
-          path: /build/reports/jacoco/test/*
+      # - name: 'Publish Test Report'
+        # if: always()
+        # uses: actions/upload-artifact@v2-preview
+        # with:
+          # name: 'test-report'
+          # path: /build/reports/jacoco/test/*
           
       # Runs a single command using the runners shell
       - name: Built and test project
