@@ -115,8 +115,8 @@ sonar.coverage.jacoco.xmlReportPaths=/home/runner/work/create-pipeline/create-pi
 * To build the project `./gradlew clean build`. <br/>
 
 ## Artifacts
-*After each job runs generated files or reports able to upload to the artifacts `actions/upload-artifact@v2` with defined  **name** and **path**.<br/>
-*User able to download generated reports or files by clicking them.<br/>
+* After each job runs generated files or reports able to upload to the artifacts `actions/upload-artifact@v2` with defined  **name** and **path**.<br/>
+* User able to download generated reports or files by clicking them.<br/>
 ```
       - name: 'Publish Test Report'
         if: always()
