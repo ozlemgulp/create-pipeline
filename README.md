@@ -42,7 +42,9 @@ dependencyCheck {
     failOnError=false
 	format=org.owasp.dependencycheck.reporting.ReportGenerator.Format.ALL
 
-}```
+}
+
+```
 
 ## test job
 
