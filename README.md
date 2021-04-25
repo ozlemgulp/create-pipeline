@@ -17,11 +17,19 @@ This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/a
 Basically, the application has four main parts:
 1. dependency-check: OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
 2. test: Unit tests and Integration tests executed and results send to artifacts.
-$\qquad$ a. Test Coverage: Code coverage calculated with Jacoco.
-$\qquad$ b. Integration Tests:
+<div style="padding-left: 30px;">
+a. Test Coverage: Code coverage calculated with Jacoco.
+</div>
+<div style="padding-left: 30px;">
+b. Integration Tests:
+</div>
 3. sonarcloud: Code static analysis performed
-$\qquad$Test Coverage results published to the sonarCloud
-$\qquad$Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)<br/>
+4. <div style="padding-left: 30px;">
+Test Coverage results published to the sonarCloud
+</div>
+<div style="padding-left: 30px;">
+Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)
+</div>
 4. build: gradle task build
 
 ## Application structure
