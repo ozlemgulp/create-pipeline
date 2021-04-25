@@ -32,30 +32,54 @@ dependency-check task generate OWASP dependency check report under the path:`./b
 * `./gradlew --stacktrace dependencyCheckAnalyze` command created the report
 * Then created reports uploaded to the artifact. *github.com/user/repo/artifacts/latest*
 
+>Add dependencycheck plugin to the **build.gradle.kts** :
 ```
-  dependency-check:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: OWASP checker
-        run: ./gradlew --stacktrace dependencyCheckAnalyze
-    
-      - name: OWASP Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: dependency-check-reports
-          path: ./build/reports/
+	id("org.owasp.dependencycheck") version "6.1.5"
 ```
 
-## test
+```
+dependencyCheck {
+    failOnError=false
+	format=org.owasp.dependencycheck.reporting.ReportGenerator.Format.ALL
 
-The application currently uses H2 embedded database. The connection is defined in `config/local.kt`. If you want to change the database you need to provide the correct dependency for the driver and change the configuration. 
+}```
+
+## test job
+
+test job has 3 steps:
+* To code coverage run `./gradlew test jacocoTestReport`. Created code coverage report uploaded to the artifact.
+>Add jacoco plugin to the **build.gradle.kts** and enable xml report for further uses:
+
+```
+     jacoco
+```
+
+```
+     tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+    }
+}
+
+```
+
+* To test run `./gradlew test`. Then created test report uploaded to the artifact.
+* Code Coverage Verification option `./gradlew test jacocoTestCoverageVerification`.
+>Add jacocoTestCoverageVerification task to the **build.gradle.kts** and define minimum coverage limit:
+
+```
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.8".toBigDecimal()
+            }
+        }
+    }
+}
+
+```
+
 
 ## Tests
 
