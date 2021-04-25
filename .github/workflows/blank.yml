@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: testresults.xml
-          path: ./build/test-results/test/
+          files: ./build/test-results/test/*.xml
         
   sonarcloud:
     if: always()
