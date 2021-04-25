@@ -9,6 +9,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    paths-ignore:
+      -'**.md'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -16,7 +18,7 @@ on:
 jobs:
 
   # This workflow contains a single job called "build"
-  build_and_test:
+  test:
     if: always()
     needs: [dependency-check]  
     # The type of runner that the job will run on
@@ -45,8 +47,8 @@ jobs:
 
           
       # Runs a single command using the runners shell
-      - name: Built and test project
-        run: ./gradlew clean build
+      - name: Test project
+        run: ./gradlew test
       - name: 'Publish Test Report'
         if: always()
         uses: actions/upload-artifact@v2
@@ -65,7 +67,7 @@ jobs:
         
   sonarcloud:
     if: always()
-    needs: [build_and_test,dependency-check]
+    needs: [test,dependency-check]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -115,4 +117,16 @@ jobs:
           name: dependency-check-reports
           path: ./build/reports/
           
-    
+  build:
+    if: always()
+    needs: [dependency-check,sonarcloud,test]
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2      
+      # Runs a single command using the runners shell
+      - name: Built the project
+        run: ./gradlew clean build 
