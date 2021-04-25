@@ -1,29 +1,28 @@
-# ![RealWorld Example App](logo.png)
+# ![GitHub Actions](https://res.cloudinary.com/practicaldev/image/fetch/s--qUsP0VSp--/c_imagga_scale,f_auto,fl_progressive,h_1080,q_auto,w_1080/https://thepracticaldev.s3.amazonaws.com/i/vmeforsb7sbldnxw0v58.png)
 
-[![Java CI](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app/workflows/Java%20CI/badge.svg)](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app/actions)
-[![codecov](https://codecov.io/gh/alisabzevari/kotlin-http4k-realworld-example-app/branch/master/graph/badge.svg)](https://codecov.io/gh/alisabzevari/kotlin-http4k-realworld-example-app)
+[![CI/CD](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml/badge.svg)](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml)
 
-> ### Kotlin + http4k codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
+This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app) to purpose of create a pipeline and learn about GitHub actions.
 
-This codebase was created to demonstrate a fully fledged fullstack application built with Kotlin + http4k + Exposed including CRUD operations, authentication, routing, pagination, and more.
+# Overview
+* Project build with [Gradle](https://gradle.org/)
+* Code with [Kotlin](https://kotlinlang.org/)
+* Test with [Kotest](https://github.com/kotest/kotest/)
+* Code static analysis performed with [SonarCloud](https://sonarcloud.io/dashboard?id=ozlemgulp_create-pipeline)
+* Dependency checks performed with OWASP Dependency-Check.
+* Code coverage performed with Jacoco [![Jacoco](https://abyte.stream/assets/img_5a9b6290e8d26.png)](https://docs.gradle.org/current/userguide/jacoco_plugin.html)<br/>
 
-For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
+## Pipeline Structure
 
-# How it works
-
-The application was made mainly to demo the functionality of http4k framework together with exposed.
-
-## Tech stack
-The application was built with:
-
-* [Kotlin](https://kotlinlang.org) as programming language.
-* [http4k](https://http4k.org) as web framework.
-* [h2](https://www.h2database.com/html/main.html), an embedded lightweight database, as data storage. Although the application can support all the databases supported by exposed.
-* [exposed](https://github.com/JetBrains/Exposed) to access database and build typesafe SQL queries.
-* [jsonwebtoken](https://github.com/jwtk/jjwt) to handle JSON Web Tokens for request authorization.
-* [log4j](https://logging.apache.org/log4j/2.x/) for proper logging in the application.
-* [kotest](https://github.com/kotest/kotest/) as testing framework for kotlin.
-* [mockk](https://mockk.io/) as mocking library for Kotlin.
+Basically, the application has four main parts:
+1. dependency-check: OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
+2. test: Unit tests and Integration tests executed and results send to artifacts.
+> Test Coverage: Code coverage calculated with Jacoco 
+> Integration Tests:
+3. sonarcloud: Code static analysis performed
+>Test Coverage results published to the sonarCloud
+>Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test bug reported via [Jira](https://jira.sonarsource.com/browse/SONARSLANG-353), After reported bug fixed, task expected to import results successfullt.)<br/>
+4. build: gradle task build
 
 ## Application structure
 
@@ -74,12 +73,3 @@ You need Java 11 installed.
 ./gradlew run
 ```
 The server will be available on `http://localhost:9000`
-
-# Contribution
-
-There are various ways to contribute to this project. Some of them are:
-* Just clone the project and play with it! This is the purpose of this project.
-* Create an issue if you find a bug or you have suggestions.
-* Fix bugs, improve code or documentation.
-* Write more tests for the project to increase the code coverage.
-* Or look at the issue with [help wanted](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) label.
