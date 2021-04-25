@@ -2,9 +2,9 @@
 
 [![CI/CD](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml/badge.svg)](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml)
 
-This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app) to purpose of create a pipeline and learn about GitHub actions.
+This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app) to purpose of creating a pipeline and learning about GitHub actions.
 
-# Overview
+# Project Overview
 * Project build with [Gradle](https://gradle.org/)
 * Code with [Kotlin](https://kotlinlang.org/)
 * Test with [Kotest](https://github.com/kotest/kotest/)
@@ -14,23 +14,23 @@ This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/a
 
 ## Pipeline Structure
 
-Basically, the application has four main jobs:
-1. dependency-check: OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
-2. test: Unit tests and Integration tests executed and results send to artifacts.<br/>
+Basically, the application has **4** main jobs:
+1. **dependency-check:** OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
+2. **test:** Unit tests and Integration tests executed and results send to artifacts.<br/>
     2.1. Test Coverage: Code coverage calculated with Jacoco.<br/>
     2.2. Integration Tests:<br/>
   
-3. sonarcloud: Code static analysis performed<br/>
+3. **sonarcloud:** Code static analysis performed<br/>
     3.1. Test Coverage results published to the sonarCloud<br/>
     3.2. Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)<br/>
     
-4. build: gradle task build<br/>
+4. **build:** gradle task build<br/>
 
 ## dependency-check job
 
-dependency-check task generate OWASP dependency check report under the path:`./build/reports` in **ALL** format
-* `./gradlew --stacktrace dependencyCheckAnalyze` command created the report
-* Then created reports uploaded to the artifact. *github.com/user/repo/artifacts/latest*
+dependency-check task generate OWASP dependency check report under the path: `./build/reports` in **ALL** format
+* `./gradlew --stacktrace dependencyCheckAnalyze` command is creating the report
+* Then created reports uploaded to the artifact. Check the *github.com/user/repo/artifacts/latest* for created reports and outputs.
 
 >Add dependencycheck plugin to the **build.gradle.kts** :
 ```
@@ -46,8 +46,8 @@ dependencyCheck {
 
 ## test job
 
-test job has 3 steps:
-* To code coverage run `./gradlew test jacocoTestReport`. Created code coverage report uploaded to the artifact.
+test job has **3** steps:
+1. For the code coverage run `./gradlew test jacocoTestReport`. Created code coverage report uploaded to the artifact.
 >Add jacoco plugin to the **build.gradle.kts** and enable xml report for further uses:
 
 ```
@@ -62,8 +62,8 @@ test job has 3 steps:
 }
 ```
 
-* Run `./gradlew test` to run all tests. Then created test report uploaded to the artifact.
-* Code Coverage Verification option `./gradlew test jacocoTestCoverageVerification`.
+2.  Run `./gradlew test` to run all tests. Then created test report uploaded to the artifact.
+3.  Code Coverage Verification option `./gradlew test jacocoTestCoverageVerification`.
 >Add jacocoTestCoverageVerification task to the **build.gradle.kts** and define minimum coverage limit:
 
 ```
