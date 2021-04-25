@@ -116,8 +116,8 @@ sonar.coverage.jacoco.xmlReportPaths=/home/runner/work/create-pipeline/create-pi
 ### Artifacts
 [![artifacts](./img/artifacts.png)](https://github.com/ozlemgulp/create-pipeline/actions)<br/>
 
-*After each job runs generated files or reports able to upload to the artifacts `actions/upload-artifact@v2` with defined *name* and *path*
-*User able to download generated reports or files by clicking them.
+*After each job runs generated files or reports able to upload to the artifacts `actions/upload-artifact@v2` with defined *name* and *path*.<br/>
+*User able to download generated reports or files by clicking them.<br/>
 
 ## For Detailed Information
 To more information about github actions and generated pipeline please check [**blank.yml**](https://github.com/ozlemgulp/create-pipeline/blob/master/.github/workflows/blank.yml)
