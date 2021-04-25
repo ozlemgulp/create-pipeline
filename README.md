@@ -1,4 +1,4 @@
-# ![GitHub Actions](https://miro.medium.com/max/750/0*InaeVdy44dc0JczI.jpg)
+# [![Logo](./img/logo.png)](https://sonarcloud.io/projects)
 
 [![CI/CD](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml/badge.svg)](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml)
 
