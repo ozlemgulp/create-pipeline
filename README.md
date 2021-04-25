@@ -14,44 +14,46 @@ This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/a
 
 ## Pipeline Structure
 
-Basically, the application has four main parts:
+Basically, the application has four main jobs:
 1. dependency-check: OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
 2. test: Unit tests and Integration tests executed and results send to artifacts.<br/>
-    2.1.Test Coverage: Code coverage calculated with Jacoco.<br/>
-    2.2.Integration Tests:<br/>
+    2.1. Test Coverage: Code coverage calculated with Jacoco.<br/>
+    2.2. Integration Tests:<br/>
   
 3. sonarcloud: Code static analysis performed<br/>
-    3.1.Test Coverage results published to the sonarCloud<br/>
-    3.2.Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)<br/>
+    3.1. Test Coverage results published to the sonarCloud<br/>
+    3.2. Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)<br/>
     
 4. build: gradle task build<br/>
 
-## Application structure
+## dependency-check job
 
-Basically, the application has four main parts:
-* `main` function which instantiates all the services and handlers and connects them together, then starts the server.
-* `Router` class which handles the translation of 1. http requests to request handler calls and 2. handler results to http responses. Authorization logic is also implemented in this class.
-* `handler` package which contains a class for every request handler. Handlers are classes with one method (`invoke`) which handles the request. This package contains the whole business logic of the application. Handlers have access to data layer.
-* `ConduitRepository` class which is responsible for building database queries. In order to communicate to database, a class called `ConduitTransactionManagerImpl` is needed. this class has one method (`tx`) which connects to database and opens a transaction to communicate with database. `tx` accepts an anonymous function while provides an instance of `ConduitRepository` as a receiver.
+dependency-check task generate OWASP dependency check report under the path:`./build/reports` in **ALL** format
+* `./gradlew --stacktrace dependencyCheckAnalyze` command created the report
+* Then created reports uploaded to the artifact. *github.com/user/repo/artifacts/latest*
 
 ```
-+ config/
-    Application config as simple data classes
-+ handler/
-    All handler classes which describe business logic of the application
-+ model/
-    domain model and dtos
-+ repository/
-    table definitions, typesafe database creation scripts and classes to communicate with database
-+ util/
-    utility classes such as request filters, serialization/deserialization functions and jwt utility functions
-+ Main.kt
-    File containing main function
-+ Router.kt
-    File containing Router class responsible for handling http server communication
+  dependency-check:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: OWASP checker
+        run: ./gradlew --stacktrace dependencyCheckAnalyze
+    
+      - name: OWASP Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: dependency-check-reports
+          path: ./build/reports/
 ```
 
-## Database
+## test
 
 The application currently uses H2 embedded database. The connection is defined in `config/local.kt`. If you want to change the database you need to provide the correct dependency for the driver and change the configuration. 
 
