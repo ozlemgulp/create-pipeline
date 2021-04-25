@@ -115,4 +115,4 @@ sonar.coverage.jacoco.xmlReportPaths=/home/runner/work/create-pipeline/create-pi
 * To build the project `./gradlew clean build`. 
 
 ## For Detailed Information
-To more information check the **blank.yml**
+To more information about github actions and generated pipeline please check [**blank.yml**](https://github.com/ozlemgulp/create-pipeline/blob/master/.github/workflows/blank.yml)
