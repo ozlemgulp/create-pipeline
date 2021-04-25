@@ -112,12 +112,20 @@ sonar.coverage.jacoco.xmlReportPaths=/home/runner/work/create-pipeline/create-pi
 [![coverage](./img/coverage.png)](https://sonarcloud.io/organizations/ozlemgulp/projects)
 
 ## build job
-* To build the project `./gradlew clean build`. 
-### Artifacts
-[![artifacts](./img/artifacts.png)](https://github.com/ozlemgulp/create-pipeline/actions)<br/>
+* To build the project `./gradlew clean build`. <br/>
 
-*After each job runs generated files or reports able to upload to the artifacts `actions/upload-artifact@v2` with defined *name* and *path*.<br/>
+## Artifacts
+*After each job runs generated files or reports able to upload to the artifacts `actions/upload-artifact@v2` with defined  **name** and **path**.<br/>
 *User able to download generated reports or files by clicking them.<br/>
+```
+      - name: 'Publish Test Report'
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'test-report'
+          path: ./build/reports/tests/test/
+```
+[![artifacts](./img/artifacts.png)](https://github.com/ozlemgulp/create-pipeline/actions)<br/>
 
 ## For Detailed Information
 To more information about github actions and generated pipeline please check [**blank.yml**](https://github.com/ozlemgulp/create-pipeline/blob/master/.github/workflows/blank.yml)
