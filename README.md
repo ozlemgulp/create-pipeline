@@ -8,7 +8,6 @@ src code is not modified or changed! Changes done only on gradle.build.kts
 **Check the latest run nd results from Actions Tab of the repository.**
 
 # Project Overview
-[![Pipeline](./img/pipeline.png)](https://github.com/ozlemgulp/create-pipeline/actions)
 * Project build with [Gradle](https://gradle.org/)
 * Code with [Kotlin](https://kotlinlang.org/)
 * Test with [Kotest](https://github.com/kotest/kotest/)
@@ -17,7 +16,7 @@ src code is not modified or changed! Changes done only on gradle.build.kts
 * Code coverage performed with [Jacoco](https://www.jacoco.org/jacoco/trunk/doc/)
 
 ## Pipeline Structure
-
+[![Pipeline](./img/pipeline.png)](https://github.com/ozlemgulp/create-pipeline/actions)
 Basically, the application has **4** main jobs:
 1. **dependency-check:** OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
 2. **test:** Unit tests and Integration tests executed and results send to artifacts.<br/>
@@ -113,6 +112,10 @@ sonar.coverage.jacoco.xmlReportPaths=/home/runner/work/create-pipeline/create-pi
 
 ## build job
 * To build the project `./gradlew clean build`. 
+### Artifacts
+[![artifacts](./img/artifacts.png.png)](https://github.com/ozlemgulp/create-pipeline/actions)
+*After each job runs generated files or reports able to upload to the artifacts `actions/upload-artifact@v2` with defined *name* and *path*
+*User able to download generated reports or files by clicking them.
 
 ## For Detailed Information
 To more information about github actions and generated pipeline please check [**blank.yml**](https://github.com/ozlemgulp/create-pipeline/blob/master/.github/workflows/blank.yml)
