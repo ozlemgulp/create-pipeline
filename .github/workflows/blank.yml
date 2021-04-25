@@ -57,7 +57,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: testresults.xml
-          files: ./build/test-results/test/*.xml
+          path: ./build/test-results/test/*.xml
+          if-no-files-found: warn # 'warn' or 'ignore' are also available, defaults to `warn` 
+
         
   sonarcloud:
     if: always()
@@ -80,6 +82,12 @@ jobs:
         name: testresults.xml
         path: ./build/test-results/test/
         
+    - name: Download OWASP Dependency Check Results
+      uses: actions/download-artifact@v2
+      with:
+        name: OWASP Report
+        path: ./build/reports/
+        
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
@@ -101,10 +109,10 @@ jobs:
       - name: OWASP checker
         run: ./gradlew --stacktrace dependencyCheckAnalyze
     
-      - name: Backup OWASP Report
+      - name: OWASP Report
         uses: actions/upload-artifact@v2
         with:
-          name: dependency-check-report.html
-          path: ./build/reports/dependency-check-report.html
+          name: dependency-check-reports
+          path: ./build/reports/
           
     

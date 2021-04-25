@@ -71,7 +71,10 @@ compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
 dependencyCheck {
     failOnError=false
+	format=org.owasp.dependencycheck.reporting.ReportGenerator.Format.ALL
+
 }
+
 
 tasks.jacocoTestCoverageVerification {
     violationRules {
