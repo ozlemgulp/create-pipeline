@@ -2,10 +2,10 @@
 
 [![CI/CD](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml/badge.svg)](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml)
 
-This project created purpose of creating a pipeline and learning GitHub actions. 
-Project cloned from [kotlin-http4k-realworld-example-app](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app) public repo.
-src code is not modified or changed! Changes done only on gradle.build.kts
-**Check the latest run nd results from Actions Tab of the repository.**
+This project created purpose of creating a pipeline and learning GitHub actions.<br/>
+Project cloned from [kotlin-http4k-realworld-example-app](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app) public repo.<br/>
+src code is not modified or changed! Changes done only on gradle.build.kts<br/>
+**Check the latest run and results from [Actions](https://github.com/ozlemgulp/create-pipeline/actions) Tab of the repository.**<br/>
 
 # Project Overview
 * Project build with [Gradle](https://gradle.org/)
