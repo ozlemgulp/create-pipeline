@@ -41,9 +41,7 @@ dependency-check task generate OWASP dependency check report under the path:`./b
 dependencyCheck {
     failOnError=false
 	format=org.owasp.dependencycheck.reporting.ReportGenerator.Format.ALL
-
 }
-
 ```
 
 ## test job
@@ -62,10 +60,9 @@ test job has 3 steps:
         xml.isEnabled = true
     }
 }
-
 ```
 
-* To test run `./gradlew test`. Then created test report uploaded to the artifact.
+* Run `./gradlew test` to run all tests. Then created test report uploaded to the artifact.
 * Code Coverage Verification option `./gradlew test jacocoTestCoverageVerification`.
 >Add jacocoTestCoverageVerification task to the **build.gradle.kts** and define minimum coverage limit:
 
@@ -79,27 +76,34 @@ tasks.jacocoTestCoverageVerification {
         }
     }
 }
+```
+## sonarcloud job
+* To perform code static analysis run `sonarsource/sonarcloud-github-action@master`. Results directlypublished on [SonarCloud](https://sonarcloud.io/dashboard?id=ozlemgulp_create-pipeline).
+>**sonar.project.properties** file added to project woring dir. 
 
 ```
+sonar.organization=ozlemgulp
+sonar.projectKey=ozlemgulp_create-pipeline
 
+# relative paths to source directories. More details and properties are described
+# in https://sonarcloud.io/documentation/project-administration/narrowing-the-focus/ 
+sonar.sources=.
+sonar.dependencyCheck.reportPath=/home/runner/work/create-pipeline/create-pipeline/build/reports/dependency-check-report.xml
+sonar.coverage.jacoco.xmlReportPaths=/home/runner/work/create-pipeline/create-pipeline/build/reports/jacoco/test/jacocoTestReport.xml
+sonar.junit.reportPaths=/home/runner/work/create-pipeline/create-pipeline/build/test-results
 
-## Tests
-
-You can run `./gradlew test` to run all the tests. A test logger gradle plugin (`com.adarshr.test-logger`) has used to render the test beautifully in console.
-There are a couple of unit tests for handlers but not for all of them (contributions welcome!).
-There are integration tests to cover all the cases of the postman test file.
-
-# Getting started
-
-You need Java 11 installed.
-
-**Build and run tests:**
 ```
-./gradlew clean build
+>Jococo test coverage report published via SonarCloud by defining jacoco xml Report path. Download the artifacts to the defined `sonar.coverage.jacoco.xmlReportPaths` path 
 ```
+    - name: Download JococoTestReportArtifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jacocoTestReport.xml
+        path: ./build/reports/jacoco/test/
 
-**Start the server:**
 ```
-./gradlew run
-```
-The server will be available on `http://localhost:9000`
+## build job
+* To build the project `./gradlew clean build`. 
+
+## For Detailed Information
+To more information check the **blank.yml**
