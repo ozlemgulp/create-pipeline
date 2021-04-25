@@ -2,9 +2,13 @@
 
 [![CI/CD](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml/badge.svg)](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml)
 
-This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app) to purpose of creating a pipeline and learning about GitHub actions.
+This project created purpose of creating a pipeline and learning GitHub actions. 
+Project cloned from [kotlin-http4k-realworld-example-app](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app) public repo.
+src code is not modified or changed! Changes done only on gradle.build.kts
+**Check the latest run nd results from Actions Tab of the repository.**
 
 # Project Overview
+[![Pipeline](./img/pipeline.png)](https://github.com/ozlemgulp/create-pipeline/actions)
 * Project build with [Gradle](https://gradle.org/)
 * Code with [Kotlin](https://kotlinlang.org/)
 * Test with [Kotest](https://github.com/kotest/kotest/)
@@ -27,10 +31,10 @@ Basically, the application has **4** main jobs:
 4. **build:** gradle task build<br/>
 
 ## dependency-check job
-
+[![dependencyCheck](./img/dependencyCheck.png)](https://sonarcloud.io/organizations/ozlemgulp/projects)
 dependency-check task generate OWASP dependency check report under the path: `./build/reports` in **ALL** format
 * `./gradlew --stacktrace dependencyCheckAnalyze` command is creating the report
-* Then created reports uploaded to the artifact. Check the *github.com/user/repo/artifacts/latest* for created reports and outputs.
+* Then created reports uploaded to the artifact. Check the [*github.com/user/repo/artifacts/latest*](https://github.com/ozlemgulp/create-pipeline/actions) for created reports and outputs.
 
 >Add dependencycheck plugin to the **build.gradle.kts** :
 ```
@@ -78,6 +82,7 @@ tasks.jacocoTestCoverageVerification {
 }
 ```
 ## sonarcloud job
+[![SonarCloud](./img/sonarCloud.png)](https://sonarcloud.io/organizations/ozlemgulp/projects)
 * To perform code static analysis run `sonarsource/sonarcloud-github-action@master`. Results directlypublished on [SonarCloud](https://sonarcloud.io/dashboard?id=ozlemgulp_create-pipeline).
 >**sonar.project.properties** file added to project woring dir. 
 
@@ -100,10 +105,14 @@ sonar.junit.reportPaths=/home/runner/work/create-pipeline/create-pipeline/build/
       with:
         name: jacocoTestReport.xml
         path: ./build/reports/jacoco/test/
-
 ```
+```
+sonar.coverage.jacoco.xmlReportPaths=/home/runner/work/create-pipeline/create-pipeline/build/reports/jacoco/test/jacocoTestReport.xml
+```
+[![coverage](./img/coverage.png)](https://sonarcloud.io/organizations/ozlemgulp/projects)
+
 ## build job
 * To build the project `./gradlew clean build`. 
 
 ## For Detailed Information
-To more information check the **blank.yml**
+To more information about github actions and generated pipeline please check [**blank.yml**](https://github.com/ozlemgulp/create-pipeline/blob/master/.github/workflows/blank.yml)
