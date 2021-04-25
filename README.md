@@ -1,85 +1,109 @@
-# ![RealWorld Example App](logo.png)
+# ![GitHub Actions](https://miro.medium.com/max/750/0*InaeVdy44dc0JczI.jpg)
 
-[![Java CI](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app/workflows/Java%20CI/badge.svg)](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app/actions)
-[![codecov](https://codecov.io/gh/alisabzevari/kotlin-http4k-realworld-example-app/branch/master/graph/badge.svg)](https://codecov.io/gh/alisabzevari/kotlin-http4k-realworld-example-app)
+[![CI/CD](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml/badge.svg)](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml)
 
-> ### Kotlin + http4k codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
+This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app) to purpose of creating a pipeline and learning about GitHub actions.
 
-This codebase was created to demonstrate a fully fledged fullstack application built with Kotlin + http4k + Exposed including CRUD operations, authentication, routing, pagination, and more.
+# Project Overview
+* Project build with [Gradle](https://gradle.org/)
+* Code with [Kotlin](https://kotlinlang.org/)
+* Test with [Kotest](https://github.com/kotest/kotest/)
+* Code static analysis performed with [SonarCloud](https://sonarcloud.io/dashboard?id=ozlemgulp_create-pipeline)
+* Dependency checks performed with [OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/)
+* Code coverage performed with [Jacoco](https://www.jacoco.org/jacoco/trunk/doc/)
 
-For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
+## Pipeline Structure
 
-# How it works
+Basically, the application has **4** main jobs:
+1. **dependency-check:** OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
+2. **test:** Unit tests and Integration tests executed and results send to artifacts.<br/>
+    2.1. Test Coverage: Code coverage calculated with Jacoco.<br/>
+    2.2. Integration Tests:<br/>
+  
+3. **sonarcloud:** Code static analysis performed<br/>
+    3.1. Test Coverage results published to the sonarCloud<br/>
+    3.2. Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)<br/>
+    
+4. **build:** gradle task build<br/>
 
-The application was made mainly to demo the functionality of http4k framework together with exposed.
+## dependency-check job
 
-## Tech stack
-The application was built with:
+dependency-check task generate OWASP dependency check report under the path: `./build/reports` in **ALL** format
+* `./gradlew --stacktrace dependencyCheckAnalyze` command is creating the report
+* Then created reports uploaded to the artifact. Check the *github.com/user/repo/artifacts/latest* for created reports and outputs.
 
-* [Kotlin](https://kotlinlang.org) as programming language.
-* [http4k](https://http4k.org) as web framework.
-* [h2](https://www.h2database.com/html/main.html), an embedded lightweight database, as data storage. Although the application can support all the databases supported by exposed.
-* [exposed](https://github.com/JetBrains/Exposed) to access database and build typesafe SQL queries.
-* [jsonwebtoken](https://github.com/jwtk/jjwt) to handle JSON Web Tokens for request authorization.
-* [log4j](https://logging.apache.org/log4j/2.x/) for proper logging in the application.
-* [kotest](https://github.com/kotest/kotest/) as testing framework for kotlin.
-* [mockk](https://mockk.io/) as mocking library for Kotlin.
-
-## Application structure
-
-Basically, the application has four main parts:
-* `main` function which instantiates all the services and handlers and connects them together, then starts the server.
-* `Router` class which handles the translation of 1. http requests to request handler calls and 2. handler results to http responses. Authorization logic is also implemented in this class.
-* `handler` package which contains a class for every request handler. Handlers are classes with one method (`invoke`) which handles the request. This package contains the whole business logic of the application. Handlers have access to data layer.
-* `ConduitRepository` class which is responsible for building database queries. In order to communicate to database, a class called `ConduitTransactionManagerImpl` is needed. this class has one method (`tx`) which connects to database and opens a transaction to communicate with database. `tx` accepts an anonymous function while provides an instance of `ConduitRepository` as a receiver.
-
+>Add dependencycheck plugin to the **build.gradle.kts** :
 ```
-+ config/
-    Application config as simple data classes
-+ handler/
-    All handler classes which describe business logic of the application
-+ model/
-    domain model and dtos
-+ repository/
-    table definitions, typesafe database creation scripts and classes to communicate with database
-+ util/
-    utility classes such as request filters, serialization/deserialization functions and jwt utility functions
-+ Main.kt
-    File containing main function
-+ Router.kt
-    File containing Router class responsible for handling http server communication
+	id("org.owasp.dependencycheck") version "6.1.5"
 ```
 
-## Database
-
-The application currently uses H2 embedded database. The connection is defined in `config/local.kt`. If you want to change the database you need to provide the correct dependency for the driver and change the configuration. 
-
-## Tests
-
-You can run `./gradlew test` to run all the tests. A test logger gradle plugin (`com.adarshr.test-logger`) has used to render the test beautifully in console.
-There are a couple of unit tests for handlers but not for all of them (contributions welcome!).
-There are integration tests to cover all the cases of the postman test file.
-
-# Getting started
-
-You need Java 11 installed.
-
-**Build and run tests:**
 ```
-./gradlew clean build
+dependencyCheck {
+    failOnError=false
+	format=org.owasp.dependencycheck.reporting.ReportGenerator.Format.ALL
+}
 ```
 
-**Start the server:**
-```
-./gradlew run
-```
-The server will be available on `http://localhost:9000`
+## test job
 
-# Contribution
+test job has **3** steps:
+1. For the code coverage run `./gradlew test jacocoTestReport`. Created code coverage report uploaded to the artifact.
+>Add jacoco plugin to the **build.gradle.kts** and enable xml report for further uses:
 
-There are various ways to contribute to this project. Some of them are:
-* Just clone the project and play with it! This is the purpose of this project.
-* Create an issue if you find a bug or you have suggestions.
-* Fix bugs, improve code or documentation.
-* Write more tests for the project to increase the code coverage.
-* Or look at the issue with [help wanted](https://github.com/alisabzevari/kotlin-http4k-realworld-example-app/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) label.
+```
+     jacoco
+```
+
+```
+     tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+    }
+}
+```
+
+2.  Run `./gradlew test` to run all tests. Then created test report uploaded to the artifact.
+3.  Code Coverage Verification option `./gradlew test jacocoTestCoverageVerification`.
+>Add jacocoTestCoverageVerification task to the **build.gradle.kts** and define minimum coverage limit:
+
+```
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.8".toBigDecimal()
+            }
+        }
+    }
+}
+```
+## sonarcloud job
+* To perform code static analysis run `sonarsource/sonarcloud-github-action@master`. Results directlypublished on [SonarCloud](https://sonarcloud.io/dashboard?id=ozlemgulp_create-pipeline).
+>**sonar.project.properties** file added to project woring dir. 
+
+```
+sonar.organization=ozlemgulp
+sonar.projectKey=ozlemgulp_create-pipeline
+
+# relative paths to source directories. More details and properties are described
+# in https://sonarcloud.io/documentation/project-administration/narrowing-the-focus/ 
+sonar.sources=.
+sonar.dependencyCheck.reportPath=/home/runner/work/create-pipeline/create-pipeline/build/reports/dependency-check-report.xml
+sonar.coverage.jacoco.xmlReportPaths=/home/runner/work/create-pipeline/create-pipeline/build/reports/jacoco/test/jacocoTestReport.xml
+sonar.junit.reportPaths=/home/runner/work/create-pipeline/create-pipeline/build/test-results
+
+```
+>Jococo test coverage report published via SonarCloud by defining jacoco xml Report path. Download the artifacts to the defined `sonar.coverage.jacoco.xmlReportPaths` path 
+```
+    - name: Download JococoTestReportArtifact
+      uses: actions/download-artifact@v2
+      with:
+        name: jacocoTestReport.xml
+        path: ./build/reports/jacoco/test/
+
+```
+## build job
+* To build the project `./gradlew clean build`. 
+
+## For Detailed Information
+To more information check the **blank.yml**
