@@ -1,4 +1,4 @@
-# ![GitHub Actions](https://res.cloudinary.com/practicaldev/image/fetch/s--qUsP0VSp--/c_imagga_scale,f_auto,fl_progressive,h_1080,q_auto,w_1080/https://thepracticaldev.s3.amazonaws.com/i/vmeforsb7sbldnxw0v58.png)
+# ![GitHub Actions](https://miro.medium.com/max/750/0*InaeVdy44dc0JczI.jpg)
 
 [![CI/CD](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml/badge.svg)](https://github.com/ozlemgulp/create-pipeline/actions/workflows/blank.yml)
 
@@ -17,11 +17,11 @@ This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/a
 Basically, the application has four main parts:
 1. dependency-check: OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
 2. test: Unit tests and Integration tests executed and results send to artifacts.
-> Test Coverage: Code coverage calculated with Jacoco 
-> Integration Tests:
+a. Test Coverage: Code coverage calculated with Jacoco <space><space>*<space>
+b. Integration Tests: <space><space>*<space>
 3. sonarcloud: Code static analysis performed
 >Test Coverage results published to the sonarCloud
->Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test bug reported via [Jira](https://jira.sonarsource.com/browse/SONARSLANG-353), After reported bug fixed, task expected to import results successfullt.)<br/>
+>Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)<br/>
 4. build: gradle task build
 
 ## Application structure
