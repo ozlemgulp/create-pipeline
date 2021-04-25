@@ -9,19 +9,19 @@ This repo cloned from [kotlin-http4k-realworld-example-app](https://github.com/a
 * Code with [Kotlin](https://kotlinlang.org/)
 * Test with [Kotest](https://github.com/kotest/kotest/)
 * Code static analysis performed with [SonarCloud](https://sonarcloud.io/dashboard?id=ozlemgulp_create-pipeline)
-* Dependency checks performed with OWASP Dependency-Check.
-* Code coverage performed with Jacoco [![Jacoco](https://abyte.stream/assets/img_5a9b6290e8d26.png)](https://docs.gradle.org/current/userguide/jacoco_plugin.html)<br/>
+* Dependency checks performed with [OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/)
+* Code coverage performed with [Jacoco](https://www.jacoco.org/jacoco/trunk/doc/)
 
 ## Pipeline Structure
 
 Basically, the application has four main parts:
 1. dependency-check: OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
 2. test: Unit tests and Integration tests executed and results send to artifacts.
-a. Test Coverage: Code coverage calculated with Jacoco <space><space>*<space>
-b. Integration Tests: <space><space>*<space>
+$\qquad$ a. Test Coverage: Code coverage calculated with Jacoco.
+$\qquad$ b. Integration Tests:
 3. sonarcloud: Code static analysis performed
->Test Coverage results published to the sonarCloud
->Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)<br/>
+$\qquad$Test Coverage results published to the sonarCloud
+$\qquad$Integration test result published to the sonarCloud. (SonarCloud Kotlin Integratin Test [Bug](https://jira.sonarsource.com/browse/SONARSLANG-353) reported via Jira, After reported bug fixed, task expected to import results successfully.)<br/>
 4. build: gradle task build
 
 ## Application structure
