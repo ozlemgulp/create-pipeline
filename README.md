@@ -17,7 +17,7 @@ src code is not modified or changed! Changes done only on gradle.build.kts<br/>
 
 ## Pipeline Structure
 [![Pipeline](./img/pipeline.png)](https://github.com/ozlemgulp/create-pipeline/actions)
-Basically, the application has **4** main jobs:
+Basically, workflow has **4** main jobs:
 1. **dependency-check:** OWASP Dependency-Check identifies project dependencies on open-source code and checks if there are known vulnerabilities associated with that code.<br/>
 2. **test:** Unit tests and Integration tests executed and results send to artifacts.<br/>
     2.1. Test Coverage: Code coverage calculated with Jacoco.<br/>
@@ -51,7 +51,8 @@ dependencyCheck {
 
 test job has **3** steps:
 1. For the code coverage run `./gradlew test jacocoTestReport`. Created code coverage report uploaded to the artifact.
->Add jacoco plugin to the **build.gradle.kts** and enable xml report for further uses:
+>Add jacoco plugin to the **build.gradle.kts** and enable xml report for further uses.
+>xml format of report needed to publishing the results from SonarCube.
 
 ```
      jacoco
@@ -83,7 +84,7 @@ tasks.jacocoTestCoverageVerification {
 ## sonarcloud job
 [![SonarCloud](./img/sonarCloud.png)](https://sonarcloud.io/organizations/ozlemgulp/projects)
 * To perform code static analysis run `sonarsource/sonarcloud-github-action@master`. Results directlypublished on [SonarCloud](https://sonarcloud.io/dashboard?id=ozlemgulp_create-pipeline).
->**sonar.project.properties** file added to project woring dir. 
+>**sonar.project.properties** file added to project working directory. 
 
 ```
 sonar.organization=ozlemgulp
