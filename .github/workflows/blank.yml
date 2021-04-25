@@ -51,6 +51,13 @@ jobs:
         with:
           name: 'test-report'
           path: ./build/reports/tests/test/
+          
+      - name: 'Publish Test Results in xml format'
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: testresults.xml
+          path: ./build/test-results/test/
         
   sonarcloud:
     if: always()
@@ -66,6 +73,13 @@ jobs:
       with:
         name: jacocoTestReport.xml
         path: ./build/reports/jacoco/test/
+        
+    - name: Download TestResultArtifact
+      uses: actions/download-artifact@v2
+      with:
+        name: testresults.xml
+        path: ./build/test-results/test/
+        
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
